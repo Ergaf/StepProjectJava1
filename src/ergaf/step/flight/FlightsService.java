@@ -4,10 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FlightsService {
-    private CollectionFlightDao flightDao = new CollectionFlightDao();
+
+    private CollectionFlightDao flightDao;
 
     {
         System.out.println("создался екземпляр "+this.getClass().getSimpleName());
+    }
+
+    public FlightsService(CollectionFlightDao flightDao) {
+        this.flightDao = flightDao;
     }
 
     public List<Flight> giveAllFlights() {

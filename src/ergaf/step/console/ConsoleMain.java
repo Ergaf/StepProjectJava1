@@ -1,21 +1,33 @@
 package ergaf.step.console;
 
+import ergaf.step.booking.BookingController;
+import ergaf.step.booking.BookingService;
+import ergaf.step.flight.CollectionFlightDao;
 import ergaf.step.flight.Flight;
 import ergaf.step.flight.FlightsController;
+import ergaf.step.flight.FlightsService;
 
 import java.util.Scanner;
 
 public class ConsoleMain {
     Scanner in = new Scanner(System.in);
-    FlightsController fcontroller = new FlightsController();
+
+    FlightsController fcontroller;
+    BookingController bookingController;
+
 
     {
         System.out.println("создался екземпляр "+this.getClass().getSimpleName());
     }
 
 
+    public ConsoleMain(FlightsController flightsController, BookingController bookingController) {
+        this.fcontroller = flightsController;
+        this.bookingController = bookingController;
+    }
 
-    public void startConsole(){
+    public void startConsole()
+    {
         boolean running = true;
         fcontroller.loadDataInFile();
         if(fcontroller.giveAllFlights().size() <= 0){
@@ -35,7 +47,7 @@ public class ConsoleMain {
                     ifMenu();
                     break;
                 case "3":
-                    System.out.print("3: ");
+                    System.out.println("место назначения:");
                     ifMenu();
                     break;
                 case "4":
