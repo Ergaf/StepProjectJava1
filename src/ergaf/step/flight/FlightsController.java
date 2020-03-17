@@ -1,20 +1,18 @@
 package ergaf.step.flight;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlightsController {
     FlightsService service;
 
-    {
-        System.out.println("создался екземпляр "+this.getClass().getSimpleName());
-    }
-
     public FlightsController(FlightsService service) {
         this.service = service;
     }
 
-    public List<Flight> giveAllFlights() {
-        return service.giveAllFlights();
+    public ArrayList<Flight> getAllFlights()
+    {
+        return service.getAllFlights();
     }
 
     public void displayAllFlights() {
@@ -29,11 +27,13 @@ public class FlightsController {
         service.saveFlightToCollection(flight);
     }
 
-    public void saveDataToFile(){
-        service.saveDataToFile();
+    public void saveData(ArrayList<Flight> flights){
+        service.saveData(flights);
     }
 
-    public void loadDataInFile(){
-        service.loadDataInFile();
+    public void loadData(){
+        service.loadData(
+                service.prepareData()
+        );
     }
 }

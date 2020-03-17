@@ -3,78 +3,34 @@ package ergaf.step.flight;
 import ergaf.step.LogOrError;
 import ergaf.step.Logger;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CollectionFlightDao implements FlightBaseInterface {
-    private List<Flight> flights = new ArrayList<>();
-    private File file = new File("Data");
+
+    private ArrayList<Flight> flights = new ArrayList<>();
     Logger logger = new Logger();
 
-    {
-        System.out.println("создался екземпляр "+this.getClass().getSimpleName());
-    }
-
-
     @Override
-    public List<Flight> giveAllFlights() {
+    public ArrayList<Flight> getAllFlights() {
         logger.log(LogOrError.LOG, "был получен список полетов");
-        return this.flights;
+        return flights;
     }
 
     @Override
     public void saveFlightToCollection(Flight flight) {
+        logger.log(LogOrError.LOG, "saveFlightToCollection");
         flights.add(flight);
     }
 
     @Override
     public void clearFlightList() {
+        logger.log(LogOrError.LOG, "clearFlightList");
         flights.clear();
     }
 
     @Override
-    public void saveDataToFile() {
-        try {
-            FileOutputStream f = new FileOutputStream(file);
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            if (file.exists()) {
-                file.delete();
-                file.createNewFile();
-            }
-
-            for (Flight flight : flights) {
-                o.writeObject(flight);
-            }
-
-            o.close();
-            f.close();
-            logger.log(LogOrError.LOG, "база данных успешно сохранена в файл");
-
-        } catch (IOException e ) {
-            e.printStackTrace();
-            logger.log(LogOrError.ERROR, "ошибка записи в файл базы данных");
-        }
-    }
-
-    @Override
-    public void loadDataInFile() {
-        try {
-            FileInputStream f = new FileInputStream(file);
-            ObjectInputStream o = new ObjectInputStream(f);
-
-            while(f.available() > 0) {
-                flights.add((Flight) o.readObject());
-            }
-
-            o.close();
-            f.close();
-            logger.log(LogOrError.LOG, "база данных успешно загружена из файла");
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            logger.log(LogOrError.ERROR, "ошибка чтения из файла базы данных");
-        }
+    public void loadData(ArrayList<Flight> flights) {
+        logger.log(LogOrError.LOG, "loadData");
+        this.flights = flights;
     }
 }

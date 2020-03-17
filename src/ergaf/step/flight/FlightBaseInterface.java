@@ -1,11 +1,10 @@
 package ergaf.step.flight;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface FlightBaseInterface {
-    List<Flight> giveAllFlights();
+    ArrayList<Flight> getAllFlights();
     void saveFlightToCollection(Flight flight);
     void clearFlightList();
-    void saveDataToFile();
-    void loadDataInFile();
+    void loadData(ArrayList<Flight> flights);
 }
