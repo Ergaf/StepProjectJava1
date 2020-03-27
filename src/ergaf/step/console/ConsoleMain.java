@@ -8,6 +8,8 @@ import ergaf.step.flight.*;
 import ergaf.step.user.User;
 import ergaf.step.user.UserController;
 
+import java.time.LocalDateTime;
+
 public class ConsoleMain implements ConsoleInterface{
 
     Input subInput;
@@ -37,7 +39,12 @@ public class ConsoleMain implements ConsoleInterface{
 
         switch (userIn) {
             case "1":
-                fcontroller.displayAllFlights();
+                fcontroller.displayFlights(
+                        fcontroller.getFlightsByRange(
+                                LocalDateTime.now(),
+                                LocalDateTime.now().plusDays(1)
+                        )
+                );
                 break;
             case "2":
                 System.out.print("Введите айди рейса: ");

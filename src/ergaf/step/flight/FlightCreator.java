@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 
 public class FlightCreator {
 
-    private static final String START_DATE = "01/01/2020 00:00";
-    private static final String END_DATE = "02/01/2020 00:00";
+    private static final String START_DATE = "27/03/2020 00:00";
+    private static final String END_DATE = "05/04/2020 00:00";
     private String from;
     private int i = 0;
     Random random = new Random();
@@ -29,14 +29,7 @@ public class FlightCreator {
 
     public void createFlightBase(){
         i=0;
-        try {
-            dateGenerator = new DateGenerator(
-                    START_DATE,
-                    END_DATE
-            );
-        } catch (ParseException e) {
-            throw new FlightCreationException("Unable to create flight because of incorrect date time");
-        }
+        dateGenerator = new DateGenerator(2);
 
         ArrayList<String> toList = new ArrayList<>();
         int fiftyPercent = (int) (flightAmount*0.5);

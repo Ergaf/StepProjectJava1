@@ -26,6 +26,11 @@ public class DateGenerator {
         this.endTime = endDate.getTime();
     }
 
+    public DateGenerator(int daysInterval) {
+        this.beginTime = new Date().getTime();
+        this.endTime = this.beginTime + daysInterval * 24 * 60 * 60 * 1000;
+    }
+
     public static LocalDate getFlightDate(int flightYear, int flightMonth, int flightDay) {
 
         String flightDate = String.valueOf(flightDay) +
@@ -56,5 +61,13 @@ public class DateGenerator {
     private long getRandomTimeBetweenTwoDates () {
         long diff = endTime - beginTime + 1;
         return beginTime + (long) (Math.random() * diff);
+    }
+
+    public LocalDateTime getBeginDateTime() {
+        return Instant.ofEpochMilli(beginTime).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return Instant.ofEpochMilli(endTime).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }

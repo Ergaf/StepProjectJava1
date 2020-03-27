@@ -4,8 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static org.junit.Assert.*;
 
@@ -161,5 +163,19 @@ public class FlightsControllerTest {
         );
         //then
         assertTrue(flights.size() > 0);
+    }
+
+    @Test
+    public void get_flights_by_range_return_flights() {
+        //given
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now().plusDays(1);
+        List<Flight> flights = flightsController.getFlightsByRange(start, end);
+        //when
+        //then
+        flights.forEach(
+                flight -> assertTrue(
+                        flight.getAt().isAfter(start) && flight.getAt().isBefore(end)
+                ));
     }
 }

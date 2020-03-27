@@ -1,6 +1,7 @@
 package ergaf.step.flight;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,11 @@ public class FlightsController {
     public ArrayList<Flight> getAllFlights()
     {
         return service.getAllFlights();
+    }
+
+    public List<Flight> getFlightsByRange(LocalDateTime start, LocalDateTime end)
+    {
+        return service.getFlightsByRange(start, end);
     }
 
     public void displayAllFlights() {

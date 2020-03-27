@@ -3,6 +3,7 @@ package ergaf.step.flight;
 import ergaf.step.io.FileWorker;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,6 +56,13 @@ public class FlightsService {
 
         result.addAll(crossFlights);
         return result;
+    }
+
+    public List<Flight> getFlightsByRange(LocalDateTime start, LocalDateTime end)
+    {
+        return getAllFlights().stream().filter(flight -> flight.getAt().isAfter(start) &&
+                        flight.getAt().isBefore(end)
+                ).collect(Collectors.toList());
     }
 
     public List<Flight> searchDirectFlights(String from, String to, LocalDate at, int ticketsAmount) {
