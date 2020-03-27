@@ -1,6 +1,10 @@
 package ergaf.step.booking;
 
 import ergaf.step.flight.*;
+import ergaf.step.passenger.Passenger;
+import ergaf.step.passenger.PassengerController;
+import ergaf.step.passenger.PassengerDao;
+import ergaf.step.passenger.PassengerService;
 import ergaf.step.user.User;
 import ergaf.step.user.UserController;
 import ergaf.step.user.UserDao;
@@ -18,12 +22,14 @@ public class BookingControllerTest {
     FlightsController flightsController;
     BookingController bookingController;
     UserController userController;
+    PassengerController passengerController;
 
     private final static int FLIGHTS_AMOUNT = 20;
 
     private final static String TEST_FLIGHTS_DB = "flights.test.data";
     private final static String TEST_BOOKINGS_DB = "bookings.test.data";
     private final static String TEST_USERS_DB = "users.test.data";
+    private final static String TEST_PASSENGERS_DB = "passengers.test.data";
 
     @Before
     public void executedBeforeEach() {
@@ -49,14 +55,22 @@ public class BookingControllerTest {
                         TEST_USERS_DB
                 )
         );
+
+        passengerController = new PassengerController(
+                new PassengerService(
+                        new PassengerDao(),
+                        TEST_PASSENGERS_DB
+                )
+        );
     }
 
     @Test
     public void save_data_generates_db_when_called() {
         //given
         User user = userController.addUser(new User("A", "B"));
+        Passenger passenger = passengerController.addPassenger(new Passenger(user));
         Flight flight = flightsController.getFlightById(1);
-        bookingController.addBooking(new Booking(flight, user));
+        bookingController.addBooking(new Booking(flight, passenger));
 
         //when
         ArrayList<Booking> bookings = bookingController.getAllBookings();
@@ -70,20 +84,34 @@ public class BookingControllerTest {
     public void get_bookings_by_user_returns_bookings() {
         //given
         User user = userController.addUser(new User("A", "B"));
-        Flight flight = flightsController.getFlightById(1);
-        bookingController.addBooking(new Booking(flight, user));
+        Passenger passenger1 = passengerController.addPassenger(new Passenger(user));
+        Passenger passenger2 = passengerController.addPassenger(new Passenger(
+                "P", "C"
+        ));
+        Flight flight1 = flightsController.getFlightById(1);
+        Flight flight2 = flightsController.getFlightById(2);
+        Flight flight3 = flightsController.getFlightById(3);
+
+        bookingController.addBooking(new Booking(flight1, passenger1));
+        bookingController.addBooking(new Booking(flight1, passenger1));
+        bookingController.addBooking(new Booking(flight2, passenger1));
+        bookingController.addBooking(new Booking(flight3, passenger2));
+
         //when
         List<Booking> bookings = bookingController.getBookingsByUser(user);
         //then
-        assertEquals(1, bookings.size());
+        assertEquals(2, bookings.size());
     }
 
     @Test
     public void display_flights_by_user() {
         //given
         User user = userController.addUser(new User("A", "B"));
-        Flight flight = flightsController.getFlightById(1);
-        bookingController.addBooking(new Booking(flight, user));
+        Passenger passenger = passengerController.addPassenger(new Passenger(user));
+        Flight flight1 = flightsController.getFlightById(1);
+        Flight flight2 = flightsController.getFlightById(2);
+        bookingController.addBooking(new Booking(flight1, passenger));
+        bookingController.addBooking(new Booking(flight2, passenger));
         //when
         List<Booking> bookings = bookingController.getBookingsByUser(user);
         //then
@@ -94,10 +122,11 @@ public class BookingControllerTest {
     public void cancel_booking_works_properly() {
         //given
         User user = userController.addUser(new User("A", "B"));
+        Passenger passenger = passengerController.addPassenger(new Passenger(user));
         Flight flight1 = flightsController.getFlightById(1);
         Flight flight2 = flightsController.getFlightById(2);
-        bookingController.addBooking(new Booking(flight1, user));
-        bookingController.addBooking(new Booking(flight2, user));
+        bookingController.addBooking(new Booking(flight1, passenger));
+        bookingController.addBooking(new Booking(flight2, passenger));
 
         //when
         List<Booking> bookings = bookingController.getBookingsByUser(user);
@@ -106,15 +135,17 @@ public class BookingControllerTest {
         //then
         assertTrue(bookingController.cancelBookingById(1));
         assertEquals(flight2, bookingController.getBookingById(2).getFlight());
+        assertEquals(1, bookingController.getBookingsByUser(user).size());
     }
 
     @Test
     public void adding_equal_bookings_does_not_add_new_one() {
         //given
         User user = userController.addUser(new User("A", "B"));
+        Passenger passenger = passengerController.addPassenger(new Passenger(user));
         Flight flight = flightsController.getFlightById(1);
-        bookingController.addBooking(new Booking(flight, user));
-        bookingController.addBooking(new Booking(flight, user));
+        bookingController.addBooking(new Booking(flight, passenger));
+        bookingController.addBooking(new Booking(flight, passenger));
 
         //when
         List<Booking> bookings = bookingController.getBookingsByUser(user);
@@ -126,30 +157,34 @@ public class BookingControllerTest {
     @Test
     public void display_bookings_by_user() {
         //given
-        User user1 = userController.addUser(new User("A", "B"));
         Flight flight1 = flightsController.getFlightById(1);
         Flight flight2 = flightsController.getFlightById(2);
-        bookingController.addBooking(new Booking(flight1, user1));
-        bookingController.addBooking(new Booking(flight2, user1));
-
-        User user2 = userController.addUser(new User("B", "C"));
         Flight flight3 = flightsController.getFlightById(3);
         Flight flight4 = flightsController.getFlightById(4);
-        bookingController.addBooking(new Booking(flight3, user2));
-        bookingController.addBooking(new Booking(flight4, user2));
+
+        User user = userController.addUser(new User("A", "B"));
+        Passenger passenger1 = passengerController.addPassenger(new Passenger(user));
+        Passenger passenger2 = passengerController.addPassenger(new Passenger("A", "B"));
 
         //when
+        bookingController.addBooking(new Booking(flight1, passenger1));
+        bookingController.addBooking(new Booking(flight2, passenger1));
+        bookingController.addBooking(new Booking(flight3, passenger2));
+        bookingController.addBooking(new Booking(flight4, passenger2));
+
         //then
-        bookingController.displayBookings(bookingController.getAllBookings());
+        bookingController.displayFlights(bookingController.getAllBookings());
     }
 
     @Test
     public void login_and_password_rewrite_user_when_register_booking() {
         //given
         User user1 = userController.addUser(new User("A", "B").setLogin("a").setPassword("b"));
+        Passenger passenger1 = passengerController.addPassenger(new Passenger(user1));
         Flight flight = flightsController.getFlightById(1);
         User user2 = userController.addUser(new User("A", "B"));
-        bookingController.addBooking(new Booking(flight, user2));
+        Passenger passenger2 = passengerController.addPassenger(new Passenger(user2));
+        bookingController.addBooking(new Booking(flight, passenger2));
         //when
         //then
         assertEquals(1, userController.getUserById(1).getId());

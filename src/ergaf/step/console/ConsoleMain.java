@@ -72,8 +72,12 @@ public class ConsoleMain implements ConsoleInterface{
 
                 break;
             case "4":
-                System.out.println("Все бронирования пасажиров:");
-                bookingController.displayBookings(bookingController.getAllBookings());
+                System.out.println("Все бронирования:");
+                bookingController.displayFlights(
+                        bookingController.getBookingsByUser(
+                                userController.getCurrentUser()
+                        )
+                );
                 System.out.println("Введите id бронирования для отмени:");
                 int cancelBookingId = subInput.getIntInput();
 
@@ -96,17 +100,17 @@ public class ConsoleMain implements ConsoleInterface{
                 if (user == null) {
                     System.out.println("Пасажир не найден");
                 } else {
-                    bookingController.displayFlights(
-                            bookingController.getBookingsByUser(user)
-                    );
+//                    bookingController.displayFlights(
+//                            bookingController.getBookingsByUser(user)
+//                    );
                 }
                 break;
             case "6":
                 System.out.println("Мои бронирования:");
 
-                bookingController.displayFlights(
-                        bookingController.getBookingsByUser(userController.getCurrentUser())
-                );
+//                bookingController.displayFlights(
+//                        bookingController.getBookingsByUser(userController.getCurrentUser())
+//                );
                 break;
             case "7":
                 fcontroller.unlinkData();

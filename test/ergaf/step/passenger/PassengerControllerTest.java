@@ -66,6 +66,31 @@ public class PassengerControllerTest {
     }
 
     @Test
+    public void add_passengers_with_and_without_user() {
+        //given
+        User user = userController.addUser(new User("A", "B"));
+        Passenger passenger1 = passengerController.addPassenger(new Passenger("A", "B"));
+        Passenger passenger2 = passengerController.addPassenger(new Passenger(user));
+        //when
+        //then
+        assertEquals(1, passengerController.count());
+        assertEquals(passenger1, passenger2);
+    }
+
+    @Test
+    public void add_passengers_with_and_without_user_and_with_credentials() {
+        //given
+        User user = userController.addUser(new User("A", "B").setPassword("1").setLogin("1"));
+        Passenger passenger2 = passengerController.addPassenger(new Passenger(user));
+        Passenger passenger1 = passengerController.addPassenger(new Passenger("A", "B"));
+
+        //when
+        //then
+        assertEquals(1, passengerController.count());
+        assertEquals(passenger1, passenger2);
+    }
+
+    @Test
     public void save_data_generates_db_when_called() {
         //given
         User user = userController.addUser(new User("A", "B"));

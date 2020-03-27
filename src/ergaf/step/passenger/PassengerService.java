@@ -25,7 +25,19 @@ public class PassengerService {
     }
 
     public Passenger addPassenger(Passenger passenger) {
-        if (getPassengerByFirstNameAndLastName(passenger.getFirstName(), passenger.getLastName()) != null) {
+        Passenger foundPassenger = getPassengerByFirstNameAndLastName(
+                passenger.getFirstName(),
+                passenger.getLastName()
+        );
+        if (foundPassenger != null) {
+            if (foundPassenger.hasUser() && !passenger.hasUser()) {
+                passenger.setUser(foundPassenger.getUser());
+            }
+            if (!foundPassenger.hasUser() && passenger.hasUser()) {
+                foundPassenger.setUser(passenger.getUser());
+            }
+            passenger.setId(foundPassenger.getId());
+
             return passenger;
         }
         return passengerDao.addPassenger(passenger.setId(getNextId()));

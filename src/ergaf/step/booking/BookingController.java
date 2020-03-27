@@ -48,10 +48,6 @@ public class BookingController {
         bookingService.displayFlights(bookings);
     }
 
-    public void displayBookings(List<Booking> bookings) {
-        bookingService.displayBookings(bookings);
-    }
-
     public boolean cancelBookingById(int id) {
         return bookingService.cancelBookingById(id);
     }

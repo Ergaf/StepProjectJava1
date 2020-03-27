@@ -52,6 +52,10 @@ public class Passenger implements Serializable  {
         return user;
     }
 
+    public boolean hasUser() {
+        return user != null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

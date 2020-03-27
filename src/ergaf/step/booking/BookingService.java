@@ -1,6 +1,8 @@
 package ergaf.step.booking;
 
+import ergaf.step.flight.Flight;
 import ergaf.step.io.FileWorker;
+import ergaf.step.passenger.Passenger;
 import ergaf.step.user.User;
 
 import java.util.ArrayList;
@@ -46,7 +48,20 @@ public class BookingService {
     }
 
     public Booking addBooking(Booking booking) {
+        if (getBookingByPassengerAndFlight(booking.getPassenger(), booking.getFlight()) != null) {
+            return booking;
+        }
         return bookingDao.addBooking(booking.setId(getNextId()));
+    }
+
+    public Booking getBookingByPassengerAndFlight(Passenger passenger, Flight flight) {
+        return bookingDao.
+                getAllBookings().
+                stream().
+                filter(booking -> booking.getPassenger().equals(passenger) &&
+                        booking.getFlight().equals(flight)).
+                findFirst().
+                orElse(null);
     }
 
     public ArrayList<Booking> getAllBookings() {
@@ -69,7 +84,8 @@ public class BookingService {
         return bookingDao.
                 getAllBookings().
                 stream().
-                filter(booking -> booking.getUser().equals(user)).
+                filter(booking -> booking.getPassenger().getUser() != null).
+                filter(booking -> booking.getPassenger().getUser().equals(user)).
                 collect(Collectors.toList());
     }
 
@@ -78,31 +94,13 @@ public class BookingService {
     }
 
     public void displayFlights(List<Booking> bookings) {
-        bookings.forEach(booking -> System.out.println(booking.getFlight().prettyFormat()));
-    }
-
-    public void displayBookings(List<Booking> bookings) {
-        bookings.
-                stream().
-                map(Booking::getUser).
-                distinct().
-                collect(Collectors.toList()).forEach(user -> {
-                    System.out.println(user.prettyFormat());
-                    bookings.
-                            stream().
-                            filter(
-                                    booking -> booking.getUser().equals(user)
-                            ).
-                            forEach(
-                                    booking -> System.out.println(
-                                            "\t" +
-                                                    booking.getId() +
-                                                    ") " +
-                                                    booking.getFlight().prettyFormat()
-                                    )
-                            );
-                });
-
+        bookings.forEach(booking -> System.out.println(
+                "\t" +
+                        booking.getId() +
+                        ") " +
+                        booking.getFlight().prettyFormat()
+                )
+        );
     }
 
     public boolean unlinkData() {

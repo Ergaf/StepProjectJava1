@@ -4,6 +4,9 @@ import ergaf.step.flight.DateGenerator;
 import ergaf.step.flight.Flight;
 import ergaf.step.flight.FlightDao;
 import ergaf.step.flight.FlightsService;
+import ergaf.step.passenger.Passenger;
+import ergaf.step.passenger.PassengerDao;
+import ergaf.step.passenger.PassengerService;
 import ergaf.step.user.User;
 import ergaf.step.user.UserDao;
 import ergaf.step.user.UserService;
@@ -20,6 +23,7 @@ public class BookingServiceTest {
     UserService userService;
     FlightsService flightsService;
     DateGenerator dateGenerator;
+    PassengerService passengerService;
 
     @Before
     public void executedBeforeEach() {
@@ -31,6 +35,9 @@ public class BookingServiceTest {
         );
         flightsService = new FlightsService(
                 new FlightDao()
+        );
+        passengerService = new PassengerService(
+                new PassengerDao()
         );
 
         try {
@@ -49,6 +56,7 @@ public class BookingServiceTest {
         User user = userService.addUser(
                 new User("A", "B")
         );
+        Passenger passenger = passengerService.addPassenger(new Passenger(user));
         Flight flight = flightsService.addFlight(
                 new Flight("Kyiv",
                         "London",
@@ -58,7 +66,7 @@ public class BookingServiceTest {
         );
         //when
         Booking booking = bookingService.addBooking(
-                new Booking(flight, user)
+                new Booking(flight, passenger)
         );
 
         //then
