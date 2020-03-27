@@ -84,7 +84,9 @@ public class FlightsService {
     }
 
     public void displayFlights(List<Flight> flights) {
-        List<String> collect = flights.stream().map(flight -> flight.getId() + ")\t" + flight.prettyFormat())
+        List<String> collect = flights.
+                stream().
+                map(flight -> flight.getId() + ")\t" + flight.prettyFormat())
                 .collect(Collectors.toList());
 
         collect.forEach(System.out::println);

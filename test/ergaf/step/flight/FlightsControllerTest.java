@@ -178,4 +178,28 @@ public class FlightsControllerTest {
                         flight.getAt().isAfter(start) && flight.getAt().isBefore(end)
                 ));
     }
+
+    @Test
+    public void search_flight_affected_by_booked_places() {
+        //given
+        flightsController.clearFlights();
+        flightsController.addFlight(new Flight(
+                "LA",
+                "SF",
+                LocalDateTime.now(),
+                2
+        ));
+        Flight flight = flightsController.getFlightById(1);
+        //when
+        flight.setBookedPlaces(2);
+        List<Flight> flights = flightsController.searchFlights(
+                "LA",
+                "SF",
+                flight.getAt().toLocalDate(),
+                1
+        );
+        //then
+        assertEquals(0, flights.size());
+    }
+
 }

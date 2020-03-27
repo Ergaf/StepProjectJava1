@@ -14,6 +14,7 @@ public class Booking implements Serializable {
 
     public Booking(Flight flight, Passenger passenger) {
         this.flight = flight;
+        this.flight.setBookedPlaces(this.flight.getBookedPlaces()+1);
         this.passenger = passenger;
     }
 

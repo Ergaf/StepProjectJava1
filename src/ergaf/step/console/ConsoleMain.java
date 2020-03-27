@@ -128,6 +128,9 @@ public class ConsoleMain implements ConsoleInterface{
                 userController.clearUsers();
                 userController.setCurrentUser(null);
 
+                passengerController.unlinkData();
+                passengerController.clearPassengers();
+
                 flightCreator.createFlightBase();
                 System.out.println("Данние перегенерировани успешно.");
                 break;

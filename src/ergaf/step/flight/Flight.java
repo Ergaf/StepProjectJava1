@@ -12,6 +12,7 @@ public class Flight implements Serializable {
     private String to;
     private LocalDateTime at;
     private int freePlaces;
+    private int bookedPlaces;
 
     public String getFrom() {
         return from;
@@ -30,7 +31,7 @@ public class Flight implements Serializable {
     }
 
     public int getFreePlaces() {
-        return freePlaces;
+        return freePlaces - bookedPlaces;
     }
 
     public Flight(String from, String to, LocalDateTime at, int freePlaces) {
@@ -46,7 +47,6 @@ public class Flight implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Flight flight = (Flight) o;
         return getId() == flight.getId() &&
-                getFreePlaces() == flight.getFreePlaces() &&
                 getFrom().equals(flight.getFrom()) &&
                 getTo().equals(flight.getTo()) &&
                 getAt().equals(flight.getAt());
@@ -80,6 +80,15 @@ public class Flight implements Serializable {
 
     public Flight setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public int getBookedPlaces() {
+        return bookedPlaces;
+    }
+
+    public Flight setBookedPlaces(int bookedPlaces) {
+        this.bookedPlaces = bookedPlaces;
         return this;
     }
 }

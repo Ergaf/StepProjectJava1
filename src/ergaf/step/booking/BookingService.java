@@ -97,8 +97,22 @@ public class BookingService {
                 collect(Collectors.toList());
     }
 
+    public List<Booking> getBookingsByFlight(Flight flight) {
+        return bookingDao.
+                getAllBookings().
+                stream().
+                filter(booking ->booking.getFlight().equals(flight)).
+                collect(Collectors.toList());
+    }
+
     public boolean cancelBookingById(int id) {
-        return bookingDao.deleteBooking(getBookingById(id));
+        Booking booking = getBookingById(id);
+        if (booking != null) {
+            booking.getFlight().setBookedPlaces(
+                    booking.getFlight().getBookedPlaces()-1
+            );
+        }
+        return bookingDao.deleteBooking(booking);
     }
 
     public void displayFlights(List<Booking> bookings) {

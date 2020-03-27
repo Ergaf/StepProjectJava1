@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -73,4 +74,79 @@ public class BookingServiceTest {
         assertEquals(1, bookingService.count());
         assertEquals(1, bookingService.getBookingById(1).getId());
     }
+
+    @Test
+    public void get_bookings_by_flight_works_correctly() {
+        //given
+        Passenger passenger = passengerService.addPassenger(new Passenger("A", "B"));
+        Passenger passenger2 = passengerService.addPassenger(new Passenger("B", "C"));
+        Flight flight1 = flightsService.addFlight(
+                new Flight("Kyiv",
+                        "London",
+                        dateGenerator.getRandomFlightLocalDateTime(),
+                        2
+                )
+        );
+        Flight flight2 = flightsService.addFlight(
+                new Flight("Kyiv",
+                        "LA",
+                        dateGenerator.getRandomFlightLocalDateTime(),
+                        2
+                )
+        );
+        Flight flight3 = flightsService.addFlight(
+                new Flight("Kyiv",
+                        "SF",
+                        dateGenerator.getRandomFlightLocalDateTime(),
+                        2
+                )
+        );
+        //when
+        bookingService.addBooking(new Booking(flight1, passenger));
+        bookingService.addBooking(new Booking(flight1, passenger2));
+        bookingService.addBooking(new Booking(flight2, passenger));
+
+        //then
+        assertEquals(2, bookingService.getBookingsByFlight(flight1).size());
+        assertEquals(1, bookingService.getBookingsByFlight(flight2).size());
+        assertEquals(0, bookingService.getBookingsByFlight(flight3).size());
+    }
+
+    @Test
+    public void check_free_places_after_booking() {
+        //given
+        Passenger passenger = passengerService.addPassenger(new Passenger("B", "C"));
+        Flight flight = flightsService.addFlight(
+                new Flight("Kyiv",
+                        "London",
+                        dateGenerator.getRandomFlightLocalDateTime(),
+                        2
+                )
+        );
+        //when
+        //then
+        assertEquals(2, flightsService.getFlightById(1).getFreePlaces());
+        bookingService.addBooking(new Booking(flight, passenger));
+        assertEquals(1, flightsService.getFlightById(1).getFreePlaces());
+    }
+
+    @Test
+    public void cancelling_booking_increase_amount_of_booked_places() {
+        //given
+        Passenger passenger = passengerService.addPassenger(new Passenger("B", "C"));
+        Flight flight = flightsService.addFlight(
+                new Flight("Kyiv",
+                        "London",
+                        dateGenerator.getRandomFlightLocalDateTime(),
+                        2
+                )
+        );
+        //when
+        bookingService.addBooking(new Booking(flight, passenger));
+        //then
+        assertEquals(1, flightsService.getFlightById(1).getFreePlaces());
+        bookingService.cancelBookingById(1);
+        assertEquals(2, flightsService.getFlightById(1).getFreePlaces());
+    }
+
 }

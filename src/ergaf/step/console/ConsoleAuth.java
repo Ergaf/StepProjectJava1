@@ -98,7 +98,7 @@ public class ConsoleAuth implements ConsoleInterface {
                 break;
             case "3":
                 userController.saveData(userController.getAllUsers());
-                System.out.println("давай до свиданья");
+                System.out.println("Exit");
                 break;
             default:
                 System.out.print("Приложение для бронировки авиабилетов.");
