@@ -13,6 +13,7 @@ import ergaf.step.user.User;
 import ergaf.step.user.UserController;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ConsoleSearchAndBooking implements ConsoleInterface{
@@ -45,17 +46,23 @@ public class ConsoleSearchAndBooking implements ConsoleInterface{
                 System.out.println(Menu.MENU);
                 break;
             case "1":
+
+                System.out.println("Поиск и бронировка рейса. -> место отправления (Kyiv):");
+                String departure = input.getRawStringInput();
+                if (departure.isEmpty()) {
+                    departure = "Kyiv";
+                }
                 System.out.println("Поиск и бронировка рейса. -> место назначения (Germany):");
                 String destination = input.getRawStringInput();
                 if (destination.isEmpty()) {
                     destination = "Germany";
                 }
-                System.out.println("Поиск и бронировка рейса. -> дата (год) (2020):");
-                int flightYear = input.getIntInputYear(2020);
-                System.out.println("Поиск и бронировка рейса. -> дата (месяц) (01):");
-                int flightMonth = input.getIntInputMonth(1);
-                System.out.println("Поиск и бронировка рейса. -> дата (день) (01):");
-                int flightDay = input.getIntInputDay(flightYear, flightMonth, 1);
+                System.out.println("Поиск и бронировка рейса. -> дата (год) ("+ LocalDateTime.now().getYear()+"):");
+                int flightYear = input.getIntInputYear(LocalDateTime.now().getYear());
+                System.out.println("Поиск и бронировка рейса. -> дата (месяц) ("+ LocalDateTime.now().getMonth().getValue()+"):");
+                int flightMonth = input.getIntInputMonth(LocalDateTime.now().getMonth().getValue());
+                System.out.println("Поиск и бронировка рейса. -> дата (день) ("+ LocalDateTime.now().getDayOfMonth()+"):");
+                int flightDay = input.getIntInputDay(flightYear, flightMonth, LocalDateTime.now().getDayOfMonth());
                 System.out.println("Поиск и бронировка рейса. -> количество человек (сколько необходимо купить билетов):");
                 int ticketsAmount = input.getIntInput();
 
@@ -65,7 +72,7 @@ public class ConsoleSearchAndBooking implements ConsoleInterface{
                         flightDay
                 );
                 List<Flight> flights = flightsController.searchFlights(
-                        FlightCreator.DEPARTURE,
+                        departure,
                         destination,
                         desiredFlightDate,
                         ticketsAmount
