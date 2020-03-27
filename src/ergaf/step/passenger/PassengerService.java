@@ -1,5 +1,10 @@
 package ergaf.step.passenger;
 
+import ergaf.step.io.FileWorker;
+import ergaf.step.user.User;
+
+import java.util.ArrayList;
+
 public class PassengerService {
 
     private PassengerDao passengerDao;
@@ -11,9 +16,28 @@ public class PassengerService {
         this.filename = filename;
     }
 
+    public PassengerService(PassengerDao passengerDao) {
+        this.passengerDao = passengerDao;
+    }
+
+    public int count() {
+        return passengerDao.getAllPassengers().size();
+    }
 
     public Passenger addPassenger(Passenger passenger) {
+        if (getPassengerByFirstNameAndLastName(passenger.getFirstName(), passenger.getLastName()) != null) {
+            return passenger;
+        }
         return passengerDao.addPassenger(passenger.setId(getNextId()));
+    }
+
+    public Passenger getPassengerByFirstNameAndLastName(String firstname, String lastname) {
+        return passengerDao.
+                getAllPassengers().
+                stream().
+                filter(passenger -> passenger.getFirstName().equals(firstname) && passenger.getLastName().equals(lastname)).
+                findFirst().
+                orElse(null);
     }
 
     public int getNextId() {
@@ -23,5 +47,29 @@ public class PassengerService {
                 reduce((first,second) -> second).orElse(0);
 
         return id + 1;
+    }
+
+    public void saveData(ArrayList<Passenger> passengers){
+        FileWorker.serialize(filename, passengers);
+    }
+
+    public ArrayList<Passenger> prepareData() {
+        return FileWorker.deserialize(filename);
+    }
+
+    public void loadData(ArrayList<Passenger> passengers){
+        passengerDao.loadData(passengers);
+    }
+
+    public ArrayList<Passenger> getAllPassengers() {
+        return passengerDao.getAllPassengers();
+    }
+
+    public boolean unlinkData() {
+        return FileWorker.unlinkData(filename);
+    }
+
+    public void clearPassengers() {
+        passengerDao.clearPassengers();
     }
 }

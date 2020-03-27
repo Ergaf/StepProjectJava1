@@ -2,9 +2,10 @@ package ergaf.step.passenger;
 
 import ergaf.step.user.User;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Passenger {
+public class Passenger implements Serializable  {
 
     private int id;
     private String firstName;
@@ -14,6 +15,12 @@ public class Passenger {
     public Passenger(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Passenger(User user) {
+        this.user = user;
+        this.firstName = this.user.getFirstName();
+        this.lastName = this.user.getLastName();
     }
 
     public String getFirstName() {
