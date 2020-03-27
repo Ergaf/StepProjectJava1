@@ -4,7 +4,7 @@ import ergaf.step.io.FileWorker;
 import ergaf.step.passenger.Passenger;
 import ergaf.step.dao.PassengerDao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PassengerService {
 
@@ -22,7 +22,7 @@ public class PassengerService {
     }
 
     public int count() {
-        return passengerDao.getAllPassengers().size();
+        return passengerDao.getAll().size();
     }
 
     public Passenger addPassenger(Passenger passenger) {
@@ -41,12 +41,12 @@ public class PassengerService {
 
             return passenger;
         }
-        return passengerDao.addPassenger(passenger.setId(getNextId()));
+        return passengerDao.add(passenger.setId(getNextId()));
     }
 
     public Passenger getPassengerByFirstNameAndLastName(String firstname, String lastname) {
         return passengerDao.
-                getAllPassengers().
+                getAll().
                 stream().
                 filter(passenger -> passenger.getFirstName().equals(firstname) && passenger.getLastName().equals(lastname)).
                 findFirst().
@@ -54,7 +54,7 @@ public class PassengerService {
     }
 
     public int getNextId() {
-        int id = passengerDao.getAllPassengers().
+        int id = passengerDao.getAll().
                 stream().
                 mapToInt(Passenger::getId).
                 reduce((first,second) -> second).orElse(0);
@@ -62,20 +62,20 @@ public class PassengerService {
         return id + 1;
     }
 
-    public void saveData(ArrayList<Passenger> passengers){
+    public void saveData(List<Passenger> passengers){
         FileWorker.serialize(filename, passengers);
     }
 
-    public ArrayList<Passenger> prepareData() {
+    public List<Passenger> prepareData() {
         return FileWorker.deserialize(filename);
     }
 
-    public void loadData(ArrayList<Passenger> passengers){
+    public void loadData(List<Passenger> passengers){
         passengerDao.loadData(passengers);
     }
 
-    public ArrayList<Passenger> getAllPassengers() {
-        return passengerDao.getAllPassengers();
+    public List<Passenger> getAllPassengers() {
+        return passengerDao.getAll();
     }
 
     public boolean unlinkData() {
@@ -83,6 +83,6 @@ public class PassengerService {
     }
 
     public void clearPassengers() {
-        passengerDao.clearPassengers();
+        passengerDao.clear();
     }
 }

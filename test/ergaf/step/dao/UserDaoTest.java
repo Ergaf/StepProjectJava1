@@ -1,6 +1,7 @@
-package ergaf.step.user;
+package ergaf.step.dao;
 
 import ergaf.step.dao.UserDao;
+import ergaf.step.user.User;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,9 +13,9 @@ public class UserDaoTest {
         //given
         UserDao userDao = new UserDao();
         //when
-        userDao.addUser(new User("Mark", "Tven").setId(1));
+        userDao.add(new User("Mark", "Tven").setId(1));
         //then
-        assertEquals(1, userDao.getAllUsers().size());
+        assertEquals(1, userDao.getAll().size());
     }
 
     @Test
@@ -22,10 +23,10 @@ public class UserDaoTest {
         //given
         UserDao userDao = new UserDao();
         //when
-        userDao.addUser(new User("Mark", "Tven").setId(1));
-        userDao.addUser(new User("Mark", "Tven").setId(1));
+        userDao.add(new User("Mark", "Tven").setId(1));
+        userDao.add(new User("Mark", "Tven").setId(1));
         //then
-        assertEquals(1, userDao.getAllUsers().size());
+        assertEquals(1, userDao.getAll().size());
     }
 
     @Test
@@ -33,10 +34,10 @@ public class UserDaoTest {
         //given
         UserDao userDao = new UserDao();
         //when
-        userDao.addUser(new User("Mark", "Tven").setId(1));
-        userDao.addUser(new User("Mark", "Tven").setId(2));
-        userDao.clearUsers();
+        userDao.add(new User("Mark", "Tven").setId(1));
+        userDao.add(new User("Mark", "Tven").setId(2));
+        userDao.clear();
         //then
-        assertEquals(0, userDao.getAllUsers().size());
+        assertEquals(0, userDao.getAll().size());
     }
 }

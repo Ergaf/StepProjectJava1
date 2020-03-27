@@ -1,5 +1,6 @@
-package ergaf.step.booking;
+package ergaf.step.controllers;
 
+import ergaf.step.booking.Booking;
 import ergaf.step.controllers.BookingController;
 import ergaf.step.controllers.FlightsController;
 import ergaf.step.dao.BookingDao;

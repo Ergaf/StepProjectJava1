@@ -3,7 +3,7 @@ package ergaf.step.controllers;
 import ergaf.step.user.User;
 import ergaf.step.services.UserService;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UserController {
 
@@ -35,7 +35,7 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    public void saveData(ArrayList<User> users){
+    public void saveData(List<User> users){
         userService.saveData(users);
     }
 
@@ -45,7 +45,7 @@ public class UserController {
         );
     }
 
-    public ArrayList<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 

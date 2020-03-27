@@ -2,22 +2,22 @@ package ergaf.step.dao;
 
 import ergaf.step.io.Logger;
 import ergaf.step.passenger.Passenger;
-import ergaf.step.passenger.PassengerBaseInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class PassengerDao implements PassengerBaseInterface {
+public class PassengerDao implements Dao<Passenger> {
 
-    private ArrayList<Passenger> passengers = new ArrayList<>();
+    private List<Passenger> passengers = new ArrayList<>();
 
     @Override
-    public ArrayList<Passenger> getAllPassengers() {
+    public List<Passenger> getAll() {
         Logger.info("был получен список passengers");
         return passengers;
     }
 
     @Override
-    public Passenger addPassenger(Passenger passenger) {
+    public Passenger add(Passenger passenger) {
         Logger.info("addPassengerToCollection");
 
         int index = passengers.indexOf(passenger);
@@ -30,14 +30,20 @@ public class PassengerDao implements PassengerBaseInterface {
     }
 
     @Override
-    public void clearPassengers() {
+    public void clear() {
         Logger.info("clearPassengerList");
         passengers.clear();
     }
 
     @Override
-    public void loadData(ArrayList<Passenger> passengers) {
+    public void loadData(List<Passenger> passengers) {
         Logger.info("loadData");
         this.passengers = passengers;
     }
+
+    @Override
+    public boolean delete(Passenger passenger) {
+        return passengers.remove(passenger);
+    }
+
 }

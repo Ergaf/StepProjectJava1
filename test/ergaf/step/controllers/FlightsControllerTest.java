@@ -1,7 +1,10 @@
-package ergaf.step.flight;
+package ergaf.step.controllers;
 
 import ergaf.step.controllers.FlightsController;
 import ergaf.step.dao.FlightDao;
+import ergaf.step.flight.DateGenerator;
+import ergaf.step.flight.Flight;
+import ergaf.step.flight.FlightCreator;
 import ergaf.step.services.FlightsService;
 import org.junit.Before;
 import org.junit.Test;
@@ -97,7 +100,7 @@ public class FlightsControllerTest {
     @Test
     public void save_data_generates_db_when_called() {
         //given
-        ArrayList<Flight> flights = flightsController.getAllFlights();
+        List<Flight> flights = flightsController.getAllFlights();
         //when
         flightsController.saveData(flights);
         //then

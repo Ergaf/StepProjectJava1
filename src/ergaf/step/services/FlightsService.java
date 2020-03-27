@@ -27,8 +27,8 @@ public class FlightsService {
         this.filename = filename;
     }
 
-    public ArrayList<Flight> getAllFlights() {
-        return flightDao.getAllFlights();
+    public List<Flight> getAllFlights() {
+        return flightDao.getAll();
     }
 
     public List<Flight> searchFlights(String from, String to, LocalDate at, int ticketsAmount) {
@@ -82,7 +82,7 @@ public class FlightsService {
     }
 
     public void displayAllFlights() {
-        displayFlights(flightDao.getAllFlights());
+        displayFlights(flightDao.getAll());
     }
 
     public void displayFlights(List<Flight> flights) {
@@ -96,7 +96,7 @@ public class FlightsService {
 
     public Flight getFlightById(int id) {
         return flightDao.
-                getAllFlights().
+                getAll().
                 stream().
                 filter(flight -> flight.getId() == id).
                 findFirst().
@@ -104,11 +104,11 @@ public class FlightsService {
     }
 
     public Flight addFlight(Flight flight) {
-        return flightDao.addFlight(flight.setId(getNextId()));
+        return flightDao.add(flight.setId(getNextId()));
     }
 
     public int getNextId() {
-        int id = flightDao.getAllFlights().
+        int id = flightDao.getAll().
                 stream().
                 mapToInt(Flight::getId).
                 reduce((first,second) -> second).orElse(0);
@@ -117,23 +117,23 @@ public class FlightsService {
     }
 
     public int count() {
-        return flightDao.getAllFlights().size();
+        return flightDao.getAll().size();
     }
 
-    public void saveData(ArrayList<Flight> flights){
+    public void saveData(List<Flight> flights){
         FileWorker.serialize(filename, flights);
     }
 
-    public ArrayList<Flight> prepareData() {
+    public List<Flight> prepareData() {
         return FileWorker.deserialize(filename);
     }
 
-    public void loadData(ArrayList<Flight> flights){
+    public void loadData(List<Flight> flights){
         flightDao.loadData(flights);
     }
 
     public void clearFlights() {
-        flightDao.clearFlights();
+        flightDao.clear();
     }
 
     public boolean unlinkData() {

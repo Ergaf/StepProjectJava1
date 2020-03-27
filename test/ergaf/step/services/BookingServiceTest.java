@@ -1,5 +1,6 @@
-package ergaf.step.booking;
+package ergaf.step.services;
 
+import ergaf.step.booking.Booking;
 import ergaf.step.dao.BookingDao;
 import ergaf.step.flight.DateGenerator;
 import ergaf.step.flight.Flight;

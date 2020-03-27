@@ -1,11 +1,13 @@
-package ergaf.step.user;
+package ergaf.step.services;
 
 import ergaf.step.dao.UserDao;
 import ergaf.step.services.UserService;
+import ergaf.step.user.User;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -39,7 +41,7 @@ public class UserServiceTest {
         User user = new User("A", "B");
         userService.addUser(user);
         //when
-        ArrayList<User> users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         userService.saveData(users);
         //then
         userService.loadData(userService.prepareData());

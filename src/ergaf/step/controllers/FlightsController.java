@@ -5,7 +5,6 @@ import ergaf.step.services.FlightsService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FlightsController {
@@ -15,7 +14,7 @@ public class FlightsController {
         this.service = service;
     }
 
-    public ArrayList<Flight> getAllFlights()
+    public List<Flight> getAllFlights()
     {
         return service.getAllFlights();
     }
@@ -57,7 +56,7 @@ public class FlightsController {
         service.addFlight(flight);
     }
 
-    public void saveData(ArrayList<Flight> flights){
+    public void saveData(List<Flight> flights){
         service.saveData(flights);
     }
 

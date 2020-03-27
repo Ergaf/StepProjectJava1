@@ -3,7 +3,7 @@ package ergaf.step.controllers;
 import ergaf.step.passenger.Passenger;
 import ergaf.step.services.PassengerService;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PassengerController {
 
@@ -17,7 +17,7 @@ public class PassengerController {
         return passengerService.addPassenger(passenger);
     }
 
-    public void saveData(ArrayList<Passenger> passengers){
+    public void saveData(List<Passenger> passengers){
         passengerService.saveData(passengers);
     }
 
@@ -27,7 +27,7 @@ public class PassengerController {
         );
     }
 
-    public ArrayList<Passenger> getAllPassengers() {
+    public List<Passenger> getAllPassengers() {
         return passengerService.getAllPassengers();
     }
 

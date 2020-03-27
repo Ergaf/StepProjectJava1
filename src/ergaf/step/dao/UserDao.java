@@ -2,22 +2,22 @@ package ergaf.step.dao;
 
 import ergaf.step.io.Logger;
 import ergaf.step.user.User;
-import ergaf.step.user.UserBaseInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class UserDao implements UserBaseInterface {
+public class UserDao implements Dao<User> {
 
-    private ArrayList<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     @Override
-    public ArrayList<User> getAllUsers() {
+    public List<User> getAll() {
         Logger.info("был получен список users");
         return users;
     }
 
     @Override
-    public User addUser(User user) {
+    public User add(User user) {
         Logger.info("addUserToCollection");
 
         int index = users.indexOf(user);
@@ -30,15 +30,19 @@ public class UserDao implements UserBaseInterface {
     }
 
     @Override
-    public void clearUsers() {
+    public void clear() {
         Logger.info("clearUserList");
         users.clear();
     }
 
     @Override
-    public void loadData(ArrayList<User> users) {
+    public void loadData(List<User> users) {
         Logger.info("loadData");
         this.users = users;
     }
 
+    @Override
+    public boolean delete(User user) {
+        return users.remove(user);
+    }
 }

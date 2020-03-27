@@ -4,7 +4,7 @@ import ergaf.step.io.FileWorker;
 import ergaf.step.user.User;
 import ergaf.step.dao.UserDao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
 
@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public int getNextId() {
-        int id = userDao.getAllUsers().
+        int id = userDao.getAll().
                 stream().
                 mapToInt(User::getId).
                 reduce((first,second) -> second).orElse(0);
@@ -32,7 +32,7 @@ public class UserService {
 
     public User getUserById(int id) {
         return userDao.
-                getAllUsers().
+                getAll().
                 stream().
                 filter(user -> user.getId() == id).
                 findFirst().
@@ -41,43 +41,43 @@ public class UserService {
 
     public User getUserByFirstNameAndLastName(String firstname, String lastname) {
         return userDao.
-                getAllUsers().
+                getAll().
                 stream().
                 filter(user -> user.getFirstName().equals(firstname) && user.getLastName().equals(lastname)).
                 findFirst().
                 orElse(null);
     }
 
-    public ArrayList<User> getAllUsers() {
-        return userDao.getAllUsers();
+    public List<User> getAllUsers() {
+        return userDao.getAll();
     }
 
     public User addUser(User user) {
         if (getUserByFirstNameAndLastName(user.getFirstName(), user.getLastName()) != null) {
             return user;
         }
-        return userDao.addUser(user.setId(getNextId()));
+        return userDao.add(user.setId(getNextId()));
     }
 
     public int count() {
-        return userDao.getAllUsers().size();
+        return userDao.getAll().size();
     }
 
-    public void saveData(ArrayList<User> users){
+    public void saveData(List<User> users){
         FileWorker.serialize(filename, users);
     }
 
-    public ArrayList<User> prepareData() {
+    public List<User> prepareData() {
         return FileWorker.deserialize(filename);
     }
 
-    public void loadData(ArrayList<User> users){
+    public void loadData(List<User> users){
         userDao.loadData(users);
     }
 
     public User getUserByLoginAndPassword(String login, String password) {
         return userDao.
-                getAllUsers().
+                getAll().
                 stream().
                 filter(user -> user.getLogin() != null).
                 filter(user -> user.getPassword() != null).
@@ -91,7 +91,7 @@ public class UserService {
     }
 
     public void clearUsers() {
-        userDao.clearUsers();
+        userDao.clear();
     }
 
 }

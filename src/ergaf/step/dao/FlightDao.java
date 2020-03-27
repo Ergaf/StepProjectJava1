@@ -1,23 +1,23 @@
 package ergaf.step.dao;
 
 import ergaf.step.flight.Flight;
-import ergaf.step.flight.FlightBaseInterface;
 import ergaf.step.io.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class FlightDao implements FlightBaseInterface {
+public class FlightDao implements Dao<Flight> {
 
-    private ArrayList<Flight> flights = new ArrayList<>();
+    private List<Flight> flights = new ArrayList<>();
 
     @Override
-    public ArrayList<Flight> getAllFlights() {
+    public List<Flight> getAll() {
         Logger.info("был получен список полетов");
         return flights;
     }
 
     @Override
-    public Flight addFlight(Flight flight) {
+    public Flight add(Flight flight) {
         Logger.info("addFlightToCollection");
 
         int index = flights.indexOf(flight);
@@ -30,14 +30,20 @@ public class FlightDao implements FlightBaseInterface {
     }
 
     @Override
-    public void clearFlights() {
+    public void clear() {
         Logger.info("clearFlightList");
         flights.clear();
     }
 
     @Override
-    public void loadData(ArrayList<Flight> flights) {
+    public void loadData(List<Flight> flights) {
         Logger.info("loadData");
         this.flights = flights;
     }
+
+    @Override
+    public boolean delete(Flight flight) {
+        return flights.remove(flight);
+    }
+
 }
