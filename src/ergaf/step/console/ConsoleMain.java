@@ -1,13 +1,14 @@
 package ergaf.step.console;
 
+import ergaf.step.controllers.FlightsController;
 import ergaf.step.menu.Menu;
 import ergaf.step.menu.SubMenu;
-import ergaf.step.booking.BookingController;
+import ergaf.step.controllers.BookingController;
 import ergaf.step.input.Input;
 import ergaf.step.flight.*;
-import ergaf.step.passenger.PassengerController;
+import ergaf.step.controllers.PassengerController;
 import ergaf.step.user.User;
-import ergaf.step.user.UserController;
+import ergaf.step.controllers.UserController;
 
 import java.time.LocalDateTime;
 

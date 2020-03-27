@@ -1,14 +1,14 @@
 package ergaf.step.console;
 
-import ergaf.step.booking.BookingController;
+import ergaf.step.controllers.BookingController;
 import ergaf.step.flight.FlightCreator;
-import ergaf.step.flight.FlightsController;
+import ergaf.step.controllers.FlightsController;
 import ergaf.step.input.Input;
 import ergaf.step.menu.AuthMenu;
 import ergaf.step.menu.Menu;
-import ergaf.step.passenger.PassengerController;
+import ergaf.step.controllers.PassengerController;
 import ergaf.step.user.User;
-import ergaf.step.user.UserController;
+import ergaf.step.controllers.UserController;
 
 public class ConsoleAuth implements ConsoleInterface {
 

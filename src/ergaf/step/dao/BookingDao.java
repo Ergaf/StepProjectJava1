@@ -1,18 +1,21 @@
-package ergaf.step.booking;
+package ergaf.step.dao;
+
+import ergaf.step.booking.Booking;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class BookingDao implements BookingBaseInterface {
+public class BookingDao implements Dao<Booking> {
 
-    private ArrayList<Booking> bookings = new ArrayList<>();
+    private List<Booking> bookings = new ArrayList<>();
 
     @Override
-    public ArrayList<Booking> getAllBookings() {
+    public List<Booking> getAll() {
         return bookings;
     }
 
     @Override
-    public Booking addBooking(Booking booking) {
+    public Booking add(Booking booking) {
         int index = bookings.indexOf(booking);
         if (index == -1) {
             bookings.add(booking);
@@ -23,17 +26,17 @@ public class BookingDao implements BookingBaseInterface {
     }
 
     @Override
-    public void clearBookings() {
+    public void clear() {
         bookings.clear();
     }
 
     @Override
-    public void loadData(ArrayList<Booking> bookings) {
+    public void loadData (List<Booking> bookings) {
         this.bookings = bookings;
     }
 
     @Override
-    public boolean deleteBooking(Booking booking) {
+    public boolean delete(Booking booking) {
         return bookings.remove(booking);
     }
 

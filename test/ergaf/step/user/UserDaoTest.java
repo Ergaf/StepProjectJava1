@@ -1,5 +1,6 @@
 package ergaf.step.user;
 
+import ergaf.step.dao.UserDao;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

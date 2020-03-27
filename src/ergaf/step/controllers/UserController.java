@@ -1,4 +1,7 @@
-package ergaf.step.user;
+package ergaf.step.controllers;
+
+import ergaf.step.user.User;
+import ergaf.step.services.UserService;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,8 @@
 package ergaf.step.flight;
 
+import ergaf.step.controllers.FlightsController;
+import ergaf.step.dao.FlightDao;
+import ergaf.step.services.FlightsService;
 import org.junit.Before;
 import org.junit.Test;
 

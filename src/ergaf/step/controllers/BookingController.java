@@ -1,6 +1,8 @@
-package ergaf.step.booking;
+package ergaf.step.controllers;
 
 
+import ergaf.step.booking.Booking;
+import ergaf.step.services.BookingService;
 import ergaf.step.user.User;
 
 import java.util.ArrayList;
@@ -21,12 +23,12 @@ public class BookingController {
         return bookingService.count();
     }
 
-    public ArrayList<Booking> getAllBookings()
+    public List<Booking> getAllBookings()
     {
         return bookingService.getAllBookings();
     }
 
-    public void saveData(ArrayList<Booking> bookings){
+    public void saveData(List<Booking> bookings){
         bookingService.saveData(bookings);
     }
 

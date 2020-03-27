@@ -1,21 +1,21 @@
 package ergaf.step;
 
-import ergaf.step.booking.BookingController;
-import ergaf.step.booking.BookingDao;
-import ergaf.step.booking.BookingService;
+import ergaf.step.controllers.BookingController;
+import ergaf.step.dao.BookingDao;
+import ergaf.step.services.BookingService;
 import ergaf.step.console.ConsoleAuth;
 import ergaf.step.input.Input;
-import ergaf.step.flight.FlightDao;
+import ergaf.step.dao.FlightDao;
 import ergaf.step.flight.FlightCreator;
-import ergaf.step.flight.FlightsController;
-import ergaf.step.flight.FlightsService;
+import ergaf.step.controllers.FlightsController;
+import ergaf.step.services.FlightsService;
 import ergaf.step.menu.AuthMenu;
-import ergaf.step.passenger.PassengerController;
-import ergaf.step.passenger.PassengerDao;
-import ergaf.step.passenger.PassengerService;
-import ergaf.step.user.UserController;
-import ergaf.step.user.UserDao;
-import ergaf.step.user.UserService;
+import ergaf.step.controllers.PassengerController;
+import ergaf.step.dao.PassengerDao;
+import ergaf.step.services.PassengerService;
+import ergaf.step.controllers.UserController;
+import ergaf.step.dao.UserDao;
+import ergaf.step.services.UserService;
 
 public class Main {
 

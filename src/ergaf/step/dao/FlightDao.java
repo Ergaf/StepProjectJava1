@@ -1,5 +1,7 @@
-package ergaf.step.flight;
+package ergaf.step.dao;
 
+import ergaf.step.flight.Flight;
+import ergaf.step.flight.FlightBaseInterface;
 import ergaf.step.io.Logger;
 
 import java.util.ArrayList;

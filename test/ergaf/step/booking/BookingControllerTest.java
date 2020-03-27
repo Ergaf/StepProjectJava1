@@ -1,14 +1,20 @@
 package ergaf.step.booking;
 
+import ergaf.step.controllers.BookingController;
+import ergaf.step.controllers.FlightsController;
+import ergaf.step.dao.BookingDao;
+import ergaf.step.dao.FlightDao;
 import ergaf.step.flight.*;
 import ergaf.step.passenger.Passenger;
-import ergaf.step.passenger.PassengerController;
-import ergaf.step.passenger.PassengerDao;
-import ergaf.step.passenger.PassengerService;
+import ergaf.step.controllers.PassengerController;
+import ergaf.step.dao.PassengerDao;
+import ergaf.step.services.PassengerService;
+import ergaf.step.services.BookingService;
+import ergaf.step.services.FlightsService;
 import ergaf.step.user.User;
-import ergaf.step.user.UserController;
-import ergaf.step.user.UserDao;
-import ergaf.step.user.UserService;
+import ergaf.step.controllers.UserController;
+import ergaf.step.dao.UserDao;
+import ergaf.step.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -73,7 +79,7 @@ public class BookingControllerTest {
         bookingController.addBooking(new Booking(flight, passenger));
 
         //when
-        ArrayList<Booking> bookings = bookingController.getAllBookings();
+        List<Booking> bookings = bookingController.getAllBookings();
         bookingController.saveData(bookings);
         //then
         bookingController.loadData();

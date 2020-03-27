@@ -1,20 +1,21 @@
 package ergaf.step.booking;
 
+import ergaf.step.dao.BookingDao;
 import ergaf.step.flight.DateGenerator;
 import ergaf.step.flight.Flight;
-import ergaf.step.flight.FlightDao;
-import ergaf.step.flight.FlightsService;
+import ergaf.step.dao.FlightDao;
+import ergaf.step.services.FlightsService;
 import ergaf.step.passenger.Passenger;
-import ergaf.step.passenger.PassengerDao;
-import ergaf.step.passenger.PassengerService;
+import ergaf.step.dao.PassengerDao;
+import ergaf.step.services.PassengerService;
+import ergaf.step.services.BookingService;
 import ergaf.step.user.User;
-import ergaf.step.user.UserDao;
-import ergaf.step.user.UserService;
+import ergaf.step.dao.UserDao;
+import ergaf.step.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
-import java.util.List;
 
 import static org.junit.Assert.*;
 

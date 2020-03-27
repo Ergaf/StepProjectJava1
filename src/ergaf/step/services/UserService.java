@@ -1,6 +1,8 @@
-package ergaf.step.user;
+package ergaf.step.services;
 
 import ergaf.step.io.FileWorker;
+import ergaf.step.user.User;
+import ergaf.step.dao.UserDao;
 
 import java.util.ArrayList;
 

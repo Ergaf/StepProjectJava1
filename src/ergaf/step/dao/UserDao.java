@@ -1,10 +1,12 @@
-package ergaf.step.user;
+package ergaf.step.dao;
 
 import ergaf.step.io.Logger;
+import ergaf.step.user.User;
+import ergaf.step.user.UserBaseInterface;
 
 import java.util.ArrayList;
 
-public class UserDao implements UserBaseInterface{
+public class UserDao implements UserBaseInterface {
 
     private ArrayList<User> users = new ArrayList<>();
 

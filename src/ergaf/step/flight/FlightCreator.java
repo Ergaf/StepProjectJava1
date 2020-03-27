@@ -1,11 +1,9 @@
 package ergaf.step.flight;
 
-import ergaf.step.exceptions.FlightCreationException;
+import ergaf.step.controllers.FlightsController;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.function.Consumer;
 
 public class FlightCreator {
 

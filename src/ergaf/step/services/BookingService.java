@@ -1,11 +1,12 @@
-package ergaf.step.booking;
+package ergaf.step.services;
 
+import ergaf.step.booking.Booking;
+import ergaf.step.dao.BookingDao;
 import ergaf.step.flight.Flight;
 import ergaf.step.io.FileWorker;
 import ergaf.step.passenger.Passenger;
 import ergaf.step.user.User;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class BookingService {
 
     public Booking getBookingById(int id) {
         return bookingDao.
-                getAllBookings().
+                getAll().
                 stream().
                 filter(booking -> booking.getId() == id).
                 findFirst().
@@ -39,7 +40,7 @@ public class BookingService {
     }
 
     public int getNextId() {
-        int id = bookingDao.getAllBookings().
+        int id = bookingDao.getAll().
                 stream().
                 mapToInt(Booking::getId).
                 reduce((first,second) -> second).orElse(0);
@@ -51,12 +52,12 @@ public class BookingService {
         if (getBookingByPassengerAndFlight(booking.getPassenger(), booking.getFlight()) != null) {
             return booking;
         }
-        return bookingDao.addBooking(booking.setId(getNextId()));
+        return bookingDao.add(booking.setId(getNextId()));
     }
 
     public Booking getBookingByPassengerAndFlight(Passenger passenger, Flight flight) {
         return bookingDao.
-                getAllBookings().
+                getAll().
                 stream().
                 filter(booking -> booking.getPassenger().equals(passenger) &&
                         booking.getFlight().equals(flight)).
@@ -64,25 +65,25 @@ public class BookingService {
                 orElse(null);
     }
 
-    public ArrayList<Booking> getAllBookings() {
-        return bookingDao.getAllBookings();
+    public List<Booking> getAllBookings() {
+        return bookingDao.getAll();
     }
 
-    public void saveData(ArrayList<Booking> bookings){
+    public void saveData(List<Booking> bookings){
         FileWorker.serialize(filename, bookings);
     }
 
-    public ArrayList<Booking> prepareData() {
+    public List<Booking> prepareData() {
         return FileWorker.deserialize(filename);
     }
 
-    public void loadData(ArrayList<Booking> bookings){
+    public void loadData(List<Booking> bookings){
         bookingDao.loadData(bookings);
     }
 
     public List<Booking> getBookingsByUser(User user) {
         return bookingDao.
-                getAllBookings().
+                getAll().
                 stream().
                 filter(booking ->
                         booking.
@@ -99,7 +100,7 @@ public class BookingService {
 
     public List<Booking> getBookingsByFlight(Flight flight) {
         return bookingDao.
-                getAllBookings().
+                getAll().
                 stream().
                 filter(booking ->booking.getFlight().equals(flight)).
                 collect(Collectors.toList());
@@ -112,7 +113,7 @@ public class BookingService {
                     booking.getFlight().getBookedPlaces()-1
             );
         }
-        return bookingDao.deleteBooking(booking);
+        return bookingDao.delete(booking);
     }
 
     public void displayFlights(List<Booking> bookings) {
@@ -130,6 +131,6 @@ public class BookingService {
     }
 
     public void clearBookings() {
-        bookingDao.clearBookings();
+        bookingDao.clear();
     }
 }

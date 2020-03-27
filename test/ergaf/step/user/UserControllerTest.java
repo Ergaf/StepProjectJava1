@@ -1,5 +1,8 @@
 package ergaf.step.user;
 
+import ergaf.step.controllers.UserController;
+import ergaf.step.dao.UserDao;
+import ergaf.step.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 

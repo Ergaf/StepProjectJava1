@@ -1,4 +1,7 @@
-package ergaf.step.passenger;
+package ergaf.step.controllers;
+
+import ergaf.step.passenger.Passenger;
+import ergaf.step.services.PassengerService;
 
 import java.util.ArrayList;
 
