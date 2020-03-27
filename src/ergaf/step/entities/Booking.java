@@ -1,7 +1,4 @@
-package ergaf.step.booking;
-
-import ergaf.step.flight.Flight;
-import ergaf.step.passenger.Passenger;
+package ergaf.step.entities;
 
 import java.io.Serializable;
 import java.util.Objects;

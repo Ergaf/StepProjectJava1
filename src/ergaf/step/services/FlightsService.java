@@ -1,8 +1,8 @@
 package ergaf.step.services;
 
-import ergaf.step.flight.Flight;
+import ergaf.step.entities.Flight;
 import ergaf.step.dao.FlightDao;
-import ergaf.step.io.FileWorker;
+import ergaf.step.utils.io.FileWorker;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

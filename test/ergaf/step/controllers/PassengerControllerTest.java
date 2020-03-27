@@ -1,9 +1,9 @@
 package ergaf.step.controllers;
 
 import ergaf.step.dao.PassengerDao;
-import ergaf.step.passenger.Passenger;
+import ergaf.step.entities.Passenger;
 import ergaf.step.services.PassengerService;
-import ergaf.step.user.User;
+import ergaf.step.entities.User;
 import ergaf.step.dao.UserDao;
 import ergaf.step.services.UserService;
 import org.junit.Before;

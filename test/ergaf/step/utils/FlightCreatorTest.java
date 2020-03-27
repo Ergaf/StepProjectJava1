@@ -1,4 +1,4 @@
-package ergaf.step.flight;
+package ergaf.step.utils;
 
 import ergaf.step.controllers.FlightsController;
 import ergaf.step.dao.FlightDao;

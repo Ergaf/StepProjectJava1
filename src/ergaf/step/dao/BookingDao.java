@@ -1,6 +1,6 @@
 package ergaf.step.dao;
 
-import ergaf.step.booking.Booking;
+import ergaf.step.entities.Booking;
 
 import java.util.ArrayList;
 import java.util.List;

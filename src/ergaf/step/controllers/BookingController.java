@@ -1,11 +1,10 @@
 package ergaf.step.controllers;
 
 
-import ergaf.step.booking.Booking;
+import ergaf.step.entities.Booking;
 import ergaf.step.services.BookingService;
-import ergaf.step.user.User;
+import ergaf.step.entities.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookingController {

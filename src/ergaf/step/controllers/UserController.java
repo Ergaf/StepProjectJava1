@@ -1,6 +1,6 @@
 package ergaf.step.controllers;
 
-import ergaf.step.user.User;
+import ergaf.step.entities.User;
 import ergaf.step.services.UserService;
 
 import java.util.List;

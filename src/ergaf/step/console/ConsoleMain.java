@@ -4,10 +4,10 @@ import ergaf.step.controllers.FlightsController;
 import ergaf.step.menu.Menu;
 import ergaf.step.menu.SubMenu;
 import ergaf.step.controllers.BookingController;
-import ergaf.step.input.Input;
-import ergaf.step.flight.*;
+import ergaf.step.utils.input.Input;
+import ergaf.step.utils.*;
 import ergaf.step.controllers.PassengerController;
-import ergaf.step.user.User;
+import ergaf.step.entities.User;
 import ergaf.step.controllers.UserController;
 
 import java.time.LocalDateTime;

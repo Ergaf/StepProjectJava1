@@ -1,12 +1,10 @@
 package ergaf.step.services;
 
 import ergaf.step.dao.UserDao;
-import ergaf.step.services.UserService;
-import ergaf.step.user.User;
+import ergaf.step.entities.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;

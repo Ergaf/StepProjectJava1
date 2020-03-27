@@ -1,7 +1,6 @@
 package ergaf.step.dao;
 
-import ergaf.step.dao.UserDao;
-import ergaf.step.user.User;
+import ergaf.step.entities.User;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

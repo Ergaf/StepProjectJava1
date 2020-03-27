@@ -1,11 +1,11 @@
 package ergaf.step.services;
 
-import ergaf.step.booking.Booking;
+import ergaf.step.entities.Booking;
 import ergaf.step.dao.BookingDao;
-import ergaf.step.flight.Flight;
-import ergaf.step.io.FileWorker;
-import ergaf.step.passenger.Passenger;
-import ergaf.step.user.User;
+import ergaf.step.entities.Flight;
+import ergaf.step.utils.io.FileWorker;
+import ergaf.step.entities.Passenger;
+import ergaf.step.entities.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

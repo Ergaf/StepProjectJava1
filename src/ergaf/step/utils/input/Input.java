@@ -1,8 +1,7 @@
-package ergaf.step.input;
+package ergaf.step.utils.input;
 
 import java.time.Year;
 import java.time.YearMonth;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Input {

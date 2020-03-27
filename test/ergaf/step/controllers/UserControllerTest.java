@@ -2,7 +2,7 @@ package ergaf.step.controllers;
 
 import ergaf.step.dao.UserDao;
 import ergaf.step.services.UserService;
-import ergaf.step.user.User;
+import ergaf.step.entities.User;
 import org.junit.Before;
 import org.junit.Test;
 

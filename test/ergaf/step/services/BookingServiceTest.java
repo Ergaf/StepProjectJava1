@@ -1,18 +1,14 @@
 package ergaf.step.services;
 
-import ergaf.step.booking.Booking;
+import ergaf.step.entities.Booking;
 import ergaf.step.dao.BookingDao;
-import ergaf.step.flight.DateGenerator;
-import ergaf.step.flight.Flight;
+import ergaf.step.utils.DateGenerator;
+import ergaf.step.entities.Flight;
 import ergaf.step.dao.FlightDao;
-import ergaf.step.services.FlightsService;
-import ergaf.step.passenger.Passenger;
+import ergaf.step.entities.Passenger;
 import ergaf.step.dao.PassengerDao;
-import ergaf.step.services.PassengerService;
-import ergaf.step.services.BookingService;
-import ergaf.step.user.User;
+import ergaf.step.entities.User;
 import ergaf.step.dao.UserDao;
-import ergaf.step.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 

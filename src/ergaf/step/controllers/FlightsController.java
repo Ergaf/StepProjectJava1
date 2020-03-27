@@ -1,6 +1,6 @@
 package ergaf.step.controllers;
 
-import ergaf.step.flight.Flight;
+import ergaf.step.entities.Flight;
 import ergaf.step.services.FlightsService;
 
 import java.time.LocalDate;

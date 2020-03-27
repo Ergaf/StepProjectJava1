@@ -1,17 +1,15 @@
 package ergaf.step.controllers;
 
-import ergaf.step.controllers.FlightsController;
 import ergaf.step.dao.FlightDao;
-import ergaf.step.flight.DateGenerator;
-import ergaf.step.flight.Flight;
-import ergaf.step.flight.FlightCreator;
+import ergaf.step.utils.DateGenerator;
+import ergaf.step.entities.Flight;
+import ergaf.step.utils.FlightCreator;
 import ergaf.step.services.FlightsService;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;

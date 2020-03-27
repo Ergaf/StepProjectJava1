@@ -1,4 +1,4 @@
-package ergaf.step.flight;
+package ergaf.step.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

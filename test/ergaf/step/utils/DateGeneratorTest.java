@@ -1,13 +1,10 @@
-package ergaf.step.flight;
+package ergaf.step.utils;
 
 import org.junit.Test;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 

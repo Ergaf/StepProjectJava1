@@ -1,4 +1,4 @@
-package ergaf.step.user;
+package ergaf.step.entities;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,25 +1,21 @@
 package ergaf.step.controllers;
 
-import ergaf.step.booking.Booking;
-import ergaf.step.controllers.BookingController;
-import ergaf.step.controllers.FlightsController;
+import ergaf.step.entities.Booking;
 import ergaf.step.dao.BookingDao;
 import ergaf.step.dao.FlightDao;
-import ergaf.step.flight.*;
-import ergaf.step.passenger.Passenger;
-import ergaf.step.controllers.PassengerController;
+import ergaf.step.entities.Flight;
+import ergaf.step.utils.*;
+import ergaf.step.entities.Passenger;
 import ergaf.step.dao.PassengerDao;
 import ergaf.step.services.PassengerService;
 import ergaf.step.services.BookingService;
 import ergaf.step.services.FlightsService;
-import ergaf.step.user.User;
-import ergaf.step.controllers.UserController;
+import ergaf.step.entities.User;
 import ergaf.step.dao.UserDao;
 import ergaf.step.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;

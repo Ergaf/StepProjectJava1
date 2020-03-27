@@ -1,14 +1,14 @@
 package ergaf.step.console;
 
-import ergaf.step.booking.Booking;
+import ergaf.step.entities.Booking;
 import ergaf.step.controllers.BookingController;
-import ergaf.step.flight.DateGenerator;
-import ergaf.step.flight.Flight;
+import ergaf.step.utils.DateGenerator;
+import ergaf.step.entities.Flight;
 import ergaf.step.controllers.FlightsController;
-import ergaf.step.input.Input;
+import ergaf.step.utils.input.Input;
 import ergaf.step.menu.Menu;
 import ergaf.step.menu.SubMenu;
-import ergaf.step.passenger.Passenger;
+import ergaf.step.entities.Passenger;
 import ergaf.step.controllers.PassengerController;
 import ergaf.step.controllers.UserController;
 

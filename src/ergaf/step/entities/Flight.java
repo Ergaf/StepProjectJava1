@@ -1,4 +1,6 @@
-package ergaf.step.flight;
+package ergaf.step.entities;
+
+import ergaf.step.utils.DateGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
