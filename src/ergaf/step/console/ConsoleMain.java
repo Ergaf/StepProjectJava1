@@ -5,6 +5,7 @@ import ergaf.step.menu.SubMenu;
 import ergaf.step.booking.BookingController;
 import ergaf.step.input.Input;
 import ergaf.step.flight.*;
+import ergaf.step.passenger.PassengerController;
 import ergaf.step.user.User;
 import ergaf.step.user.UserController;
 
@@ -17,18 +18,21 @@ public class ConsoleMain implements ConsoleInterface{
     BookingController bookingController;
     FlightCreator flightCreator;
     UserController userController;
+    PassengerController passengerController;
 
 
     public ConsoleMain(
             FlightsController flightsController,
             BookingController bookingController,
             UserController userController,
+            PassengerController passengerController,
             Input subInput,
             FlightCreator flightCreator
     ) {
         this.fcontroller = flightsController;
         this.bookingController = bookingController;
         this.userController = userController;
+        this.passengerController = passengerController;
         this.subInput = subInput;
         this.flightCreator = flightCreator;
     }
@@ -61,7 +65,8 @@ public class ConsoleMain implements ConsoleInterface{
                                 subInput,
                                 fcontroller,
                                 userController,
-                                bookingController
+                                bookingController,
+                                passengerController
                         );
                 String command = consoleSearchAndBooking.startConsole();
 
@@ -100,17 +105,17 @@ public class ConsoleMain implements ConsoleInterface{
                 if (user == null) {
                     System.out.println("Пасажир не найден");
                 } else {
-//                    bookingController.displayFlights(
-//                            bookingController.getBookingsByUser(user)
-//                    );
+                    bookingController.displayFlights(
+                            bookingController.getBookingsByUser(user)
+                    );
                 }
                 break;
             case "6":
                 System.out.println("Мои бронирования:");
 
-//                bookingController.displayFlights(
-//                        bookingController.getBookingsByUser(userController.getCurrentUser())
-//                );
+                bookingController.displayFlights(
+                        bookingController.getBookingsByUser(userController.getCurrentUser())
+                );
                 break;
             case "7":
                 fcontroller.unlinkData();

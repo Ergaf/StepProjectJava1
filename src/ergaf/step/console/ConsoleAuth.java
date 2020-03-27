@@ -6,6 +6,7 @@ import ergaf.step.flight.FlightsController;
 import ergaf.step.input.Input;
 import ergaf.step.menu.AuthMenu;
 import ergaf.step.menu.Menu;
+import ergaf.step.passenger.PassengerController;
 import ergaf.step.user.User;
 import ergaf.step.user.UserController;
 
@@ -15,6 +16,7 @@ public class ConsoleAuth implements ConsoleInterface {
     private UserController userController;
     private FlightsController flightsController;
     private BookingController bookingController;
+    private PassengerController passengerController;
     private FlightCreator flightCreator;
 
     public ConsoleAuth(
@@ -22,11 +24,13 @@ public class ConsoleAuth implements ConsoleInterface {
             UserController userController,
             FlightsController flightsController,
             BookingController bookingController,
+            PassengerController passengerController,
             FlightCreator flightCreator) {
         this.input = input;
         this.userController = userController;
         this.flightsController = flightsController;
         this.bookingController = bookingController;
+        this.passengerController = passengerController;
         this.flightCreator = flightCreator;
     }
 
@@ -74,6 +78,7 @@ public class ConsoleAuth implements ConsoleInterface {
                             flightsController,
                             bookingController,
                             userController,
+                            passengerController,
                             input,
                             flightCreator
                     );

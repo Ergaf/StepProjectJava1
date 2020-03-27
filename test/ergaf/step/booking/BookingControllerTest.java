@@ -191,4 +191,22 @@ public class BookingControllerTest {
         assertEquals("a", userController.getUserById(1).getLogin());
         assertEquals("b", userController.getUserById(1).getPassword());
     }
+
+    @Test
+    public void add_passengers_and_then_add_user() {
+        //given
+        User user = userController.addUser(new User("A", "B"));
+        Flight flight = flightsController.getFlightById(1);
+        Passenger passenger1 = passengerController.addPassenger(new Passenger("A", "B"));
+        Passenger passenger2 = passengerController.addPassenger(new Passenger("A", "B"));
+
+        //when
+        bookingController.addBooking(new Booking(flight, passenger1));
+        bookingController.addBooking(new Booking(flight, passenger2));
+
+        //then
+        assertEquals(1, bookingController.count());
+        assertEquals(1, bookingController.getBookingsByUser(user).size());
+    }
+
 }

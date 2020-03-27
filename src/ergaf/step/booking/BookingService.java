@@ -84,8 +84,16 @@ public class BookingService {
         return bookingDao.
                 getAllBookings().
                 stream().
-                filter(booking -> booking.getPassenger().getUser() != null).
-                filter(booking -> booking.getPassenger().getUser().equals(user)).
+                filter(booking ->
+                        booking.
+                                getPassenger().
+                                getFirstName().
+                                equals(user.getFirstName()) &&
+                                booking.
+                                        getPassenger().
+                                        getLastName().
+                                        equals(user.getLastName())
+                ).
                 collect(Collectors.toList());
     }
 

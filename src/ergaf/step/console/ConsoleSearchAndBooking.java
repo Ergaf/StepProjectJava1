@@ -9,6 +9,8 @@ import ergaf.step.flight.FlightsController;
 import ergaf.step.input.Input;
 import ergaf.step.menu.Menu;
 import ergaf.step.menu.SubMenu;
+import ergaf.step.passenger.Passenger;
+import ergaf.step.passenger.PassengerController;
 import ergaf.step.user.User;
 import ergaf.step.user.UserController;
 
@@ -22,17 +24,20 @@ public class ConsoleSearchAndBooking implements ConsoleInterface{
     private FlightsController flightsController;
     private UserController userController;
     private BookingController bookingController;
+    private PassengerController passengerController;
 
     public ConsoleSearchAndBooking(
             Input input,
             FlightsController flightsController,
             UserController userController,
-            BookingController bookingController
+            BookingController bookingController,
+            PassengerController passengerController
     ) {
         this.input = input;
         this.flightsController = flightsController;
         this.userController = userController;
         this.bookingController = bookingController;
+        this.passengerController = passengerController;
     }
 
     public String startConsole()
@@ -101,8 +106,8 @@ public class ConsoleSearchAndBooking implements ConsoleInterface{
                     firstName = input.getRawStringInput();
                     System.out.println("Укажите фамилию для пасажира #" + (i+1));
                     lastName  = input.getRawStringInput();
-                    User user = userController.addUser(new User(firstName, lastName));
-//                    bookingController.addBooking(new Booking(flight, user));
+                    Passenger passenger = passengerController.addPassenger(new Passenger(firstName, lastName));
+                    bookingController.addBooking(new Booking(flight, passenger));
                     System.out.println("Бронировка сохранена");
                 }
                 break;
