@@ -47,6 +47,7 @@ public class ConsoleSearchAndBooking implements ConsoleInterface{
             case "0":
                 userController.saveData(userController.getAllUsers());
                 bookingController.saveData(bookingController.getAllBookings());
+                passengerController.saveData(passengerController.getAllPassengers());
 
                 System.out.println(Menu.MENU);
                 break;
