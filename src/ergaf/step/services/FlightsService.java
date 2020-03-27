@@ -1,5 +1,6 @@
 package ergaf.step.services;
 
+import ergaf.step.dao.Dao;
 import ergaf.step.entities.Flight;
 import ergaf.step.dao.FlightDao;
 import ergaf.step.utils.io.FileWorker;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class FlightsService {
 
-    private FlightDao flightDao;
+    private Dao<Flight> flightDao;
 
     private String filename = "flights.data";
 

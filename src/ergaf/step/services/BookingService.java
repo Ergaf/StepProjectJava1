@@ -1,5 +1,6 @@
 package ergaf.step.services;
 
+import ergaf.step.dao.Dao;
 import ergaf.step.entities.Booking;
 import ergaf.step.dao.BookingDao;
 import ergaf.step.entities.Flight;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class BookingService {
 
-    private BookingDao bookingDao;
+    private Dao<Booking> bookingDao;
 
     private String filename = "bookings.data";
 

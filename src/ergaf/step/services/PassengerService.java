@@ -1,5 +1,6 @@
 package ergaf.step.services;
 
+import ergaf.step.dao.Dao;
 import ergaf.step.utils.io.FileWorker;
 import ergaf.step.entities.Passenger;
 import ergaf.step.dao.PassengerDao;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class PassengerService {
 
-    private PassengerDao passengerDao;
+    private Dao<Passenger> passengerDao;
 
     private String filename = "passengers.data";
 
