@@ -2,6 +2,7 @@ package ergaf.step.controllers;
 
 
 import ergaf.step.entities.Booking;
+import ergaf.step.entities.Passenger;
 import ergaf.step.services.BookingService;
 import ergaf.step.entities.User;
 
@@ -42,7 +43,11 @@ public class BookingController {
     }
 
     public List<Booking> getBookingsByUser(User user) {
-        return bookingService.getBookingsByUser(user);
+        return bookingService.getBookingsByFirstAndLastNames(user.getFirstName(), user.getLastName());
+    }
+
+    public List<Booking> getBookingsByPassenger(Passenger passenger) {
+        return bookingService.getBookingsByFirstAndLastNames(passenger.getFirstName(), passenger.getLastName());
     }
 
     public void displayFlights(List<Booking> bookings) {

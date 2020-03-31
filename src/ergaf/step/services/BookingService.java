@@ -82,7 +82,7 @@ public class BookingService {
         bookingDao.loadData(bookings);
     }
 
-    public List<Booking> getBookingsByUser(User user) {
+    public List<Booking> getBookingsByFirstAndLastNames(String firstname, String lastname) {
         return bookingDao.
                 getAll().
                 stream().
@@ -90,11 +90,11 @@ public class BookingService {
                         booking.
                                 getPassenger().
                                 getFirstName().
-                                equals(user.getFirstName()) &&
+                                equals(firstname) &&
                                 booking.
                                         getPassenger().
                                         getLastName().
-                                        equals(user.getLastName())
+                                        equals(lastname)
                 ).
                 collect(Collectors.toList());
     }

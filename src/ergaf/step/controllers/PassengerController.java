@@ -27,6 +27,10 @@ public class PassengerController {
         );
     }
 
+    public Passenger getPassengerByFirstNameAndLastName(String firstname, String lastname) {
+        return passengerService.getPassengerByFirstNameAndLastName(firstname, lastname);
+    }
+
     public List<Passenger> getAllPassengers() {
         return passengerService.getAllPassengers();
     }
