@@ -65,7 +65,7 @@ public class BookingServiceTest {
         );
         //when
         Booking booking = bookingService.addBooking(
-                new Booking(flight, passenger)
+                new Booking(user, flight, passenger)
         );
 
         //then
@@ -76,6 +76,9 @@ public class BookingServiceTest {
     @Test
     public void get_bookings_by_flight_works_correctly() {
         //given
+        User user = userService.addUser(
+                new User("A", "B")
+        );
         Passenger passenger = passengerService.addPassenger(new Passenger("A", "B"));
         Passenger passenger2 = passengerService.addPassenger(new Passenger("B", "C"));
         Flight flight1 = flightsService.addFlight(
@@ -100,9 +103,9 @@ public class BookingServiceTest {
                 )
         );
         //when
-        bookingService.addBooking(new Booking(flight1, passenger));
-        bookingService.addBooking(new Booking(flight1, passenger2));
-        bookingService.addBooking(new Booking(flight2, passenger));
+        bookingService.addBooking(new Booking(user, flight1, passenger));
+        bookingService.addBooking(new Booking(user, flight1, passenger2));
+        bookingService.addBooking(new Booking(user, flight2, passenger));
 
         //then
         assertEquals(2, bookingService.getBookingsByFlight(flight1).size());
@@ -113,6 +116,9 @@ public class BookingServiceTest {
     @Test
     public void check_free_places_after_booking() {
         //given
+        User user = userService.addUser(
+                new User("A", "B")
+        );
         Passenger passenger = passengerService.addPassenger(new Passenger("B", "C"));
         Flight flight = flightsService.addFlight(
                 new Flight("Kyiv",
@@ -124,13 +130,16 @@ public class BookingServiceTest {
         //when
         //then
         assertEquals(2, flightsService.getFlightById(1).getFreePlaces());
-        bookingService.addBooking(new Booking(flight, passenger));
+        bookingService.addBooking(new Booking(user, flight, passenger));
         assertEquals(1, flightsService.getFlightById(1).getFreePlaces());
     }
 
     @Test
     public void cancelling_booking_increase_amount_of_booked_places() {
         //given
+        User user = userService.addUser(
+                new User("A", "B")
+        );
         Passenger passenger = passengerService.addPassenger(new Passenger("B", "C"));
         Flight flight = flightsService.addFlight(
                 new Flight("Kyiv",
@@ -140,7 +149,7 @@ public class BookingServiceTest {
                 )
         );
         //when
-        bookingService.addBooking(new Booking(flight, passenger));
+        bookingService.addBooking(new Booking(user, flight, passenger));
         //then
         assertEquals(1, flightsService.getFlightById(1).getFreePlaces());
         bookingService.cancelBookingById(1);

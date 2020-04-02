@@ -9,7 +9,10 @@ public class Booking implements Serializable {
     private Flight flight;
     private Passenger passenger;
 
-    public Booking(Flight flight, Passenger passenger) {
+    private User user;
+
+    public Booking(User user, Flight flight, Passenger passenger) {
+        this.user = user;
         this.flight = flight;
         this.flight.setBookedPlaces(this.flight.getBookedPlaces()+1);
         this.passenger = passenger;
@@ -23,19 +26,24 @@ public class Booking implements Serializable {
         return passenger;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
         return getId() == booking.getId() &&
-                Objects.equals(getFlight(), booking.getFlight()) &&
-                Objects.equals(getPassenger(), booking.getPassenger());
+                getFlight().equals(booking.getFlight()) &&
+                getPassenger().equals(booking.getPassenger()) &&
+                getUser().equals(booking.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFlight(), getPassenger());
+        return Objects.hash(getId(), getFlight(), getPassenger(), getUser());
     }
 
     @Override

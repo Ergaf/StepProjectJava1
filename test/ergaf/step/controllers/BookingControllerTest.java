@@ -73,7 +73,7 @@ public class BookingControllerTest {
         User user = userController.addUser(new User("A", "B"));
         Passenger passenger = passengerController.addPassenger(new Passenger(user));
         Flight flight = flightsController.getFlightById(1);
-        bookingController.addBooking(new Booking(flight, passenger));
+        bookingController.addBooking(new Booking(user, flight, passenger));
 
         //when
         List<Booking> bookings = bookingController.getAllBookings();
@@ -95,10 +95,10 @@ public class BookingControllerTest {
         Flight flight2 = flightsController.getFlightById(2);
         Flight flight3 = flightsController.getFlightById(3);
 
-        bookingController.addBooking(new Booking(flight1, passenger1));
-        bookingController.addBooking(new Booking(flight1, passenger1));
-        bookingController.addBooking(new Booking(flight2, passenger1));
-        bookingController.addBooking(new Booking(flight3, passenger2));
+        bookingController.addBooking(new Booking(user, flight1, passenger1));
+        bookingController.addBooking(new Booking(user, flight1, passenger1));
+        bookingController.addBooking(new Booking(user, flight2, passenger1));
+        bookingController.addBooking(new Booking(user, flight3, passenger2));
 
         //when
         List<Booking> bookings = bookingController.getBookingsByUser(user);
@@ -113,8 +113,8 @@ public class BookingControllerTest {
         Passenger passenger = passengerController.addPassenger(new Passenger(user));
         Flight flight1 = flightsController.getFlightById(1);
         Flight flight2 = flightsController.getFlightById(2);
-        bookingController.addBooking(new Booking(flight1, passenger));
-        bookingController.addBooking(new Booking(flight2, passenger));
+        bookingController.addBooking(new Booking(user, flight1, passenger));
+        bookingController.addBooking(new Booking(user, flight2, passenger));
         //when
         List<Booking> bookings = bookingController.getBookingsByUser(user);
         //then
@@ -128,8 +128,8 @@ public class BookingControllerTest {
         Passenger passenger = passengerController.addPassenger(new Passenger(user));
         Flight flight1 = flightsController.getFlightById(1);
         Flight flight2 = flightsController.getFlightById(2);
-        bookingController.addBooking(new Booking(flight1, passenger));
-        bookingController.addBooking(new Booking(flight2, passenger));
+        bookingController.addBooking(new Booking(user, flight1, passenger));
+        bookingController.addBooking(new Booking(user, flight2, passenger));
 
         //when
         List<Booking> bookings = bookingController.getBookingsByUser(user);
@@ -147,8 +147,8 @@ public class BookingControllerTest {
         User user = userController.addUser(new User("A", "B"));
         Passenger passenger = passengerController.addPassenger(new Passenger(user));
         Flight flight = flightsController.getFlightById(1);
-        bookingController.addBooking(new Booking(flight, passenger));
-        bookingController.addBooking(new Booking(flight, passenger));
+        bookingController.addBooking(new Booking(user, flight, passenger));
+        bookingController.addBooking(new Booking(user, flight, passenger));
 
         //when
         List<Booking> bookings = bookingController.getBookingsByUser(user);
@@ -170,10 +170,10 @@ public class BookingControllerTest {
         Passenger passenger2 = passengerController.addPassenger(new Passenger("A", "B"));
 
         //when
-        bookingController.addBooking(new Booking(flight1, passenger1));
-        bookingController.addBooking(new Booking(flight2, passenger1));
-        bookingController.addBooking(new Booking(flight3, passenger2));
-        bookingController.addBooking(new Booking(flight4, passenger2));
+        bookingController.addBooking(new Booking(user, flight1, passenger1));
+        bookingController.addBooking(new Booking(user, flight2, passenger1));
+        bookingController.addBooking(new Booking(user, flight3, passenger2));
+        bookingController.addBooking(new Booking(user, flight4, passenger2));
 
         //then
         bookingController.displayFlights(bookingController.getAllBookings());
@@ -187,7 +187,7 @@ public class BookingControllerTest {
         Flight flight = flightsController.getFlightById(1);
         User user2 = userController.addUser(new User("A", "B"));
         Passenger passenger2 = passengerController.addPassenger(new Passenger(user2));
-        bookingController.addBooking(new Booking(flight, passenger2));
+        bookingController.addBooking(new Booking(user1, flight, passenger2));
         //when
         //then
         assertEquals(1, userController.getUserById(1).getId());
@@ -204,8 +204,8 @@ public class BookingControllerTest {
         Passenger passenger2 = passengerController.addPassenger(new Passenger("A", "B"));
 
         //when
-        bookingController.addBooking(new Booking(flight, passenger1));
-        bookingController.addBooking(new Booking(flight, passenger2));
+        bookingController.addBooking(new Booking(user, flight, passenger1));
+        bookingController.addBooking(new Booking(user, flight, passenger2));
 
         //then
         assertEquals(1, bookingController.count());

@@ -42,6 +42,10 @@ public class BookingController {
         return bookingService.getBookingById(id);
     }
 
+    public List<Booking> getBookingsByOwner(User user) {
+        return bookingService.getBookingsByUser(user);
+    }
+
     public List<Booking> getBookingsByUser(User user) {
         return bookingService.getBookingsByFirstAndLastNames(user.getFirstName(), user.getLastName());
     }

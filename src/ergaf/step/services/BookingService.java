@@ -10,6 +10,7 @@ import ergaf.step.entities.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BookingService {
 
@@ -80,6 +81,21 @@ public class BookingService {
 
     public void loadData(List<Booking> bookings){
         bookingDao.loadData(bookings);
+    }
+
+    public List<Booking> getBookingsByUser(User user) {
+        List<Booking> listOne = bookingDao.
+                getAll().
+                stream().
+                filter(
+                        booking -> booking.getUser().equals(user)
+                ).
+                collect(Collectors.toList());
+
+        return Stream.concat(
+                listOne.stream(),
+                getBookingsByFirstAndLastNames(user.getFirstName(), user.getLastName()).stream())
+                .collect(Collectors.toList());
     }
 
     public List<Booking> getBookingsByFirstAndLastNames(String firstname, String lastname) {

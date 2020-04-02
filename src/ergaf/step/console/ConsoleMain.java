@@ -83,7 +83,7 @@ public class ConsoleMain implements ConsoleInterface{
             case "4":
                 System.out.println("Все бронирования:");
                 bookingController.displayFlights(
-                        bookingController.getBookingsByUser(
+                        bookingController.getBookingsByOwner(
                                 userController.getCurrentUser()
                         )
                 );
@@ -117,7 +117,7 @@ public class ConsoleMain implements ConsoleInterface{
             case "6":
                 System.out.println("Мои бронирования:");
 
-                List<Booking> bookingList = bookingController.getBookingsByUser(userController.getCurrentUser());
+                List<Booking> bookingList = bookingController.getBookingsByOwner(userController.getCurrentUser());
                 if (bookingList.size() > 0) {
                     bookingController.displayFlights(bookingList);
                 } else {

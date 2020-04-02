@@ -106,7 +106,7 @@ public class ConsoleSearchAndBooking implements ConsoleInterface{
                     System.out.println("Укажите фамилию для пасажира #" + (i+1));
                     lastName  = input.getRawStringInput();
                     Passenger passenger = passengerController.addPassenger(new Passenger(firstName, lastName));
-                    bookingController.addBooking(new Booking(flight, passenger));
+                    bookingController.addBooking(new Booking(userController.getCurrentUser(), flight, passenger));
                     System.out.println("Бронировка сохранена");
                 }
                 break;
